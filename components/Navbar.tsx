@@ -1,24 +1,15 @@
-"use client";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import {
   RegisterLink,
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
-import { useEffect } from "react";
-export default function Navbar() {
-  const { user, refreshData, isAuthenticated } = useKindeBrowserClient();
+export default async function Navbar() {
+  const { isAuthenticated } = getKindeServerSession();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  useEffect(() => {
-    const getUser = async () => {
-      if (user && user.id) {
-        await refreshData();
-      }
-    };
-    getUser();
-  }, [user, refreshData]);
-
-  return isAuthenticated ? (
+  return (await isAuthenticated()) ? (
     <div className="navbar bg-white">
       <div className="navbar-start">
         <div className="dropdown">
