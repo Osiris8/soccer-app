@@ -1,25 +1,25 @@
-# ⚽️ Soccer App – A Player Management App Built with Next.js 15
+# Soccer App – A Player Management App Built with Next.js 15
 
 **Soccer App** is a modern web application designed for managing a list of football players, offering full **CRUD** functionality—add, edit, delete, and view players. Built with **Next.js 15**, it provides a clean, intuitive, and smooth user interface for an exceptional user experience, backed by a robust backend and secure authentication.
 
-🌐 **Live Demo**: [player-app-kappa.vercel.app](https://player-app-kappa.vercel.app/)  
-📽️ **Video Demo**: [Soccer App Walkthrough](https://www.youtube.com/watch?v=txeTcmivwuY)
+**Live Demo**: [player-app-kappa.vercel.app](https://player-app-kappa.vercel.app/)  
+**Video Demo**: [Soccer App Walkthrough](https://www.youtube.com/watch?v=txeTcmivwuY)
 
 ---
 
-## ✨ Features
+## Features
 
-- 🏃‍♂️ Full **CRUD** operations for managing football players (add, edit, delete, view).
-- 🔒 Secure user authentication with **Kinde Authentication**.
-- 🗄️ Efficient data storage with **MongoDB**.
-- 🖼️ File uploads for player images using **EdgeStore**.
-- 🎨 Responsive and modern UI styled with **Tailwind CSS** and **Daisy UI**.
-- 🚀 Fast and scalable app deployed on **Vercel**.
-- 🧪 API testing with **Postman** for backend endpoints.
+- Full **CRUD** operations for managing football players (add, edit, delete, view).
+- Secure user authentication with **Kinde Authentication**.
+- Efficient data storage with **MongoDB**.
+- File uploads for player images using **EdgeStore**.
+- Responsive and modern UI styled with **Tailwind CSS** and **Daisy UI**.
+- Fast and scalable app deployed on **Vercel**.
+- API testing with **Postman** for backend endpoints.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these steps to set up and run the Soccer App locally.
 
@@ -107,7 +107,7 @@ To deploy the app to Vercel:
 
 ---
 
-## 🧪 Testing with Postman
+## Testing with Postman
 
 To test the API endpoints, use **Postman** to send requests to the deployed API (`https://player-app-kappa.vercel.app`) or locally (`http://localhost:3000`). Below are the key endpoints for managing players. Ensure you’re authenticated via Kinde (include the JWT token in the `Authorization` header as `Bearer <token>` if required).
 
@@ -185,7 +185,7 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 
 ---
 
-## 📚 Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
 - **Authentication**: Kinde Authentication
@@ -198,7 +198,7 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -210,10 +210,10 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📬 Contact
+## Contact
 
 Have questions or suggestions? Connect on [X](https://x.com/migan_osiris).
 
 ---
 
-⭐ **Star this repo if you find it useful!**
+**Star this repo if you find it useful!**
