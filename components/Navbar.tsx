@@ -5,20 +5,20 @@ import {
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
-//import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export default function Navbar() {
-  const { user } = useKindeBrowserClient();
-  //const [isClient, setIsClient] = useState(false);
-  const { isAuthenticated } = useKindeBrowserClient();
+  const { user, refreshData } = useKindeBrowserClient();
+  const [isClient, setIsClient] = useState(false);
 
-  /*useEffect(() => {
+  useEffect(() => {
     const getUser = async () => {
       if (user && user.id) {
+        await refreshData();
         setIsClient(true);
       }
     };
     getUser();
-  }, [user]);*/
+  }, [user, refreshData]);
 
   return (
     <div className="navbar bg-white">
@@ -87,7 +87,7 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      {isAuthenticated ? (
+      {isClient ? (
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
             <div
