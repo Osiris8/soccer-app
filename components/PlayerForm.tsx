@@ -1,5 +1,5 @@
 "use client";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+//import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-
+import axios from "axios";
 import {
   Select,
   SelectContent,
@@ -35,12 +35,15 @@ interface PlayerFormProps {
 }
 
 export default function PlayerForm({ initialData }: PlayerFormProps) {
-  const { user } = useKindeBrowserClient();
+  // const { user } = useKindeBrowserClient();
   const router = useRouter();
   const pathname = usePathname();
   const [isPlayerCreator, setIsPlayerCreator] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const { edgestore } = useEdgeStore();
+  const [user, setUser] = useState<{ id: string; firstname: string } | null>(
+    null
+  );
   const [formData, setFormData] = useState(
     initialData || {
       userId: "",
@@ -58,6 +61,22 @@ export default function PlayerForm({ initialData }: PlayerFormProps) {
   );
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    axios
+      .get(`/api/auth/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data); // ✅ contient id + firstname
+      })
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+      });
+
     // Update UserId if it's available
     if (user?.id) {
       setFormData((prev) => ({ ...prev, userId: user.id }));

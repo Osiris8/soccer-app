@@ -1,23 +1,31 @@
 "use client";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import {
-  RegisterLink,
-  LoginLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+
+import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 export default function Navbar() {
-  const { user } = useKindeBrowserClient();
-  const [isClient, setIsClient] = useState(false);
+  const [user, setUser] = useState<{ id: string; firstname: string } | null>(
+    null
+  );
 
   useEffect(() => {
-    const getUser = async () => {
-      if (user && user.id) {
-        setIsClient(true);
-      }
-    };
-    getUser();
-  }, [user]);
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    axios
+      .get(`/api/auth/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data); // ✅ contient id + firstname
+      })
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+      });
+  }, []);
 
   return (
     <div className="navbar bg-white">
@@ -86,7 +94,7 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      {isClient ? (
+      {user ? (
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
             <div
@@ -97,7 +105,7 @@ export default function Navbar() {
               <div className="w-10 rounded-full">
                 <div className="avatar placeholder">
                   <div className="bg-neutral text-neutral-content w-10 rounded-full">
-                    <span className="text-xl">{user?.given_name?.[0]}</span>
+                    <span className="text-xl">{user?.firstname?.[0]}</span>
                   </div>
                 </div>
               </div>
@@ -120,8 +128,16 @@ export default function Navbar() {
         </div>
       ) : (
         <div className="navbar-end">
-          <LoginLink className="btn btn-secondary mr-2"> Sign In</LoginLink>
-          <RegisterLink className="btn btn-primary"> Sign Up</RegisterLink>
+          <Button asChild>
+            <Link className="bg-primary mr-2" href="/login">
+              Sign In
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link className="bg-secondary" href="/signup">
+              Sign Up
+            </Link>
+          </Button>
         </div>
       )}
     </div>

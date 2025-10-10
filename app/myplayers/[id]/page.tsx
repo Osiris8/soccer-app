@@ -2,7 +2,7 @@
 import PlayerCard from "@/components/PlayerCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+
 import { useState, useEffect } from "react";
 interface Player {
   _id: string;
@@ -17,14 +17,33 @@ import { usePathname } from "next/navigation";
 import Search from "@/components/Search";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Card() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [players, setPlayers] = useState<Player[]>([]);
   const router = useRouter();
   const pathname = usePathname();
-  const { user } = useKindeBrowserClient();
+  const [user, setUser] = useState<{ id: string; firstname: string } | null>(
+    null
+  );
+
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    axios
+      .get(`/api/auth/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data); // ✅ contient id + firstname
+      })
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+      });
     const urlId = `${pathname}`.split("/").pop();
     if (!urlId) return;
     console.log(urlId);
