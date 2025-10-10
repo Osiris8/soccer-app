@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Loader } from "@/components/ui/loader";
+
 import axios from "axios";
 
 export function SignupForm({
@@ -32,7 +32,7 @@ export function SignupForm({
 
     axios({
       method: "POST",
-      url: `api/auth/signup`,
+      url: "api/auth/signup",
       withCredentials: true,
       data: {
         firstname,
@@ -57,11 +57,9 @@ export function SignupForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex justify-center text-2xl font-medium">
         {isLoading ? (
-          <Loader
-            variant={"text-shimmer"}
-            text={"registration in progress..."}
-            size={"lg"}
-          />
+          <h1 className="text-center text-2xl mb-2">
+            Your action is in progress...
+          </h1>
         ) : (
           ""
         )}

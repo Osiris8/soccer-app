@@ -11,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Loader } from "@/components/ui/loader";
 import axios from "axios";
 
 export function LoginForm({
@@ -50,11 +49,9 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex justify-center text-2xl font-medium">
         {isLoading ? (
-          <Loader
-            variant={"text-shimmer"}
-            text={"Connection in progress..."}
-            size={"lg"}
-          />
+          <h1 className="text-center text-2xl mb-2">
+            Your action is in progress...
+          </h1>
         ) : (
           ""
         )}
