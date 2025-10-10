@@ -9,7 +9,6 @@ export const POST = async (req: Request) => {
     await connectToDB();
     const { firstname, lastname, email, password } = await req.json();
 
-    // ✅ Vérification si l'utilisateur existe déjà
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -18,10 +17,8 @@ export const POST = async (req: Request) => {
       );
     }
 
-    // 🔒 Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ Création de l'utilisateur
     const newUser = await User.create({
       firstname,
       lastname,

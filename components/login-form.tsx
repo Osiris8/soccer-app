@@ -27,7 +27,7 @@ export function LoginForm({
     const emailError = document.querySelector(".emailError");
     axios({
       method: "POST",
-      url: `api/auth/login`,
+      url: "api/auth/login",
       withCredentials: true,
       data: {
         email: email,

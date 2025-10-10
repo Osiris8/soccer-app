@@ -9,6 +9,11 @@ export default function Navbar() {
     null
   );
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -118,7 +123,9 @@ export default function Navbar() {
                 <a href="/player/add">Add New Player</a>
               </li>
               <li>
-                <Link href="/api/auth/logout">Logout</Link>
+                <Link href="" onClick={handleLogout}>
+                  Logout
+                </Link>
               </li>
               <li>
                 <a href={`/myplayers/${user?.id}`}>My Players</a>

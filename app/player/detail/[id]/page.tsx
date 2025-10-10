@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { PlayerDetailCard } from "@/components/PlayerDetailCard";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import axios from "axios";
 export default function Home() {
   const pathname = usePathname();
-  const { user } = useKindeBrowserClient();
+  const [user, setUser] = useState<{ id: string; firstname: string } | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPlayerCreator, setIsPlayerCreator] = useState(false);
@@ -30,6 +32,22 @@ export default function Home() {
   });
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    axios
+      .get(`/api/auth/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data); // ✅ contient id + firstname
+      })
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+      });
+
     const playerId = `${pathname}`.split("/").pop();
     console.log(pathname);
     console.log(playerId);
