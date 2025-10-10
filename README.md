@@ -1,9 +1,8 @@
-# Soccer App – A Player Management App Built with Next.js 15
+# Soccer App – A Soccer Management App Built with Next.js 15
 
 **Soccer App** is a modern web application designed for managing a list of football players, offering full **CRUD** functionality—add, edit, delete, and view players. Built with **Next.js 15**, it provides a clean, intuitive, and smooth user interface for an exceptional user experience, backed by a robust backend and secure authentication.
 
-**Live Demo**: [player-app-kappa.vercel.app](https://player-app-kappa.vercel.app/)  
-**Video Demo**: [Soccer App Walkthrough](https://www.youtube.com/watch?v=txeTcmivwuY)
+**Live Demo**: [https://soccer-app-ruddy.vercel.app](https://soccer-app-ruddy.vercel.app/)
 
 ---
 
@@ -32,7 +31,7 @@ Ensure you have the following installed:
 - **Git**
 - **Postman** (optional, for API testing)
 - A **MongoDB** account (e.g., MongoDB Atlas: [mongodb.com](https://www.mongodb.com))
-- A **Kinde Authentication** account ([kinde.com](https://kinde.com))
+- A **JSON wEB Authentication** account ([jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken))
 - An **EdgeStore** account ([edgestore.dev](https://edgestore.dev))
 - A **Vercel** account for deployment ([vercel.com](https://vercel.com))
 
@@ -68,12 +67,7 @@ touch .env.local  # On Windows: echo. > .env.local
 Open the `.env.local` file and add the following environment variables, replacing placeholders with your actual values:
 
 ```bash
-KINDE_CLIENT_ID="YOUR_KINDE_CLIENT_ID"
-KINDE_CLIENT_SECRET="YOUR_KINDE_CLIENT_SECRET"
-KINDE_ISSUER_URL="YOUR_KINDE_ISSUER_URL"
-KINDE_SITE_URL="http://localhost:3000"
-KINDE_POST_LOGOUT_REDIRECT_URL="http://localhost:3000"
-KINDE_POST_LOGIN_REDIRECT_URL="http://localhost:3000"
+JWT_SECRET="your-secret-key-here"
 MONGODB_URI="YOUR_MONGODB_URI"
 EDGE_STORE_ACCESS_KEY="YOUR_EDGE_STORE_ACCESS_KEY"
 EDGE_STORE_SECRET_KEY="YOUR_EDGE_STORE_SECRET_KEY"
@@ -81,8 +75,6 @@ EDGE_STORE_SECRET_KEY="YOUR_EDGE_STORE_SECRET_KEY"
 
 #### How to Obtain Environment Variables:
 
-- **KINDE_CLIENT_ID**, **KINDE_CLIENT_SECRET**, **KINDE_ISSUER_URL**: Obtain from your Kinde Authentication dashboard after creating an app ([kinde.com](https://kinde.com)).
-- **KINDE_SITE_URL**, **KINDE_POST_LOGOUT_REDIRECT_URL**, **KINDE_POST_LOGIN_REDIRECT_URL**: Use `http://localhost:3000` for local development. Update to your deployed URL (e.g., `https://player-app-kappa.vercel.app`) for production.
 - **MONGODB_URI**: Get from your MongoDB Atlas dashboard (e.g., `mongodb+srv://user:password@cluster0.mongodb.net/dbname`).
 - **EDGE_STORE_ACCESS_KEY**, **EDGE_STORE_SECRET_KEY**: Create an EdgeStore account at [edgestore.dev](https://edgestore.dev) and obtain these from your project settings.
 
@@ -103,18 +95,18 @@ To deploy the app to Vercel:
 1. Push your repository to GitHub.
 2. Connect your repository to Vercel via the Vercel dashboard.
 3. Set the environment variables (listed above) in Vercel’s project settings.
-4. Deploy the project. The app will be available at a URL like `https://player-app-kappa.vercel.app`.
+4. Deploy the project. The app is available at a URL like `https://soccer-app-ruddy.vercel.app/`.
 
 ---
 
 ## Testing with Postman
 
-To test the API endpoints, use **Postman** to send requests to the deployed API (`https://player-app-kappa.vercel.app`) or locally (`http://localhost:3000`). Below are the key endpoints for managing players. Ensure you’re authenticated via Kinde (include the JWT token in the `Authorization` header as `Bearer <token>` if required).
+To test the API endpoints, use **Postman** to send requests to the deployed API (`https://soccer-app-ruddy.vercel.app/`) or locally (`http://localhost:3000`). Below are the key endpoints for managing players. Ensure you’re authenticated via Kinde (include the JWT token in the `Authorization` header as `Bearer <token>` if required).
 
 ### 1. Create a Player
 
 - **Method**: POST
-- **URL**: `https://player-app-kappa.vercel.app/api/player`
+- **URL**: `https://soccer-app-ruddy.vercel.app`
 - **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
 - **Body** (JSON):
   ```json
@@ -136,21 +128,21 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 ### 2. Retrieve All Players
 
 - **Method**: GET
-- **URL**: `https://player-app-kappa.vercel.app/api/myplayers/yourUserId`
+- **URL**: `https://soccer-app-ruddy.vercel.app/api/myplayers/yourUserId`
 - **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
 - **Response**: Returns a list of all players.
 
 ### 3. Display a Player
 
 - **Method**: GET
-- **URL**: `https://player-app-kappa.vercel.app/api/players/your-player-id`
+- **URL**: `https://soccer-app-ruddy.vercel.app/api/players/your-player-id`
 - **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
 - **Response**: Returns a list of all players.
 
 ### 3. Update a Player
 
 - **Method**: PATCH
-- **URL**: `https://player-app-kappa.vercel.app/api/player/your-player-id`
+- **URL**: `https://soccer-app-ruddy.vercel.app/api/player/your-player-id`
 - **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
 - **Body** (JSON):
   ```json
@@ -172,7 +164,7 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 ### 4. Delete a Player
 
 - **Method**: DELETE
-- **URL**: `https://player-app-kappa.vercel.app/api/player/your-player-id`
+- **URL**: `https://soccer-app-ruddy.vercel.app/api/player/your-player-id`
 - **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
 - **Response**: Confirms the player is deleted. Replace `your-player-id` with the actual player ID.
 
@@ -188,7 +180,7 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
-- **Authentication**: Kinde Authentication
+- **Authentication**: Json Web Toke,
 - **Database**: MongoDB
 - **File Storage**: EdgeStore
 - **Styling**: Tailwind CSS, Daisy UI
