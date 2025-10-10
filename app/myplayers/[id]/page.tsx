@@ -39,7 +39,7 @@ export default function Card() {
         },
       })
       .then((res) => {
-        setUser(res.data); // ✅ contient id + firstname
+        setUser(res.data);
       })
       .catch((err) => {
         console.error("Error fetching user:", err);
