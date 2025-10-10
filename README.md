@@ -38,7 +38,7 @@ Ensure you have the following installed:
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/Osiris8/player-app
+git clone https://github.com/Osiris8/soccer-app.git
 cd soccer-app
 ```
 
@@ -48,12 +48,6 @@ Install the required Node.js packages:
 
 ```bash
 npm install
-```
-
-If no `package.json` exists, install the core dependencies:
-
-```bash
-npm install next@15 @neondatabase/serverless tailwindcss daisyui @edgestore/react @edgestore/next @kinde-oss/kinde-auth-nextjs mongodb
 ```
 
 ### 4. Configure Environment Variables
@@ -107,7 +101,7 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 
 - **Method**: POST
 - **URL**: `https://soccer-app-ruddy.vercel.app`
-- **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
+- **Headers**: `Authorization: Bearer <your_jwt_token>`
 - **Body** (JSON):
   ```json
   {
@@ -129,21 +123,21 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 
 - **Method**: GET
 - **URL**: `https://soccer-app-ruddy.vercel.app/api/myplayers/yourUserId`
-- **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
+- **Headers**: `Authorization: Bearer <your_jwt_token>` (if authentication is required)
 - **Response**: Returns a list of all players.
 
 ### 3. Display a Player
 
 - **Method**: GET
 - **URL**: `https://soccer-app-ruddy.vercel.app/api/players/your-player-id`
-- **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
+- **Headers**: `Authorization: Bearer <your_jwt_token>` (if authentication is required)
 - **Response**: Returns a list of all players.
 
 ### 3. Update a Player
 
 - **Method**: PATCH
 - **URL**: `https://soccer-app-ruddy.vercel.app/api/player/your-player-id`
-- **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
+- **Headers**: `Authorization: Bearer <your_jwt_token>` (if authentication is required)
 - **Body** (JSON):
   ```json
   {
@@ -165,25 +159,18 @@ To test the API endpoints, use **Postman** to send requests to the deployed API 
 
 - **Method**: DELETE
 - **URL**: `https://soccer-app-ruddy.vercel.app/api/player/your-player-id`
-- **Headers**: `Authorization: Bearer <your_kinde_jwt_token>` (if authentication is required)
+- **Headers**: `Authorization: Bearer <your_jwt_token>` (if authentication is required)
 - **Response**: Confirms the player is deleted. Replace `your-player-id` with the actual player ID.
-
-### Notes
-
-- Replace `your-player-id` with the actual ID of the player (obtained from the POST or GET response).
-- For local testing, use `http://localhost:3000` instead of the Vercel URL.
-- Obtain a JWT token by logging in via Kinde Authentication (e.g., through the app’s login page or Kinde’s API).
-- If a Postman collection is available in the repository, import it for pre-configured requests.
 
 ---
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
-- **Authentication**: Json Web Toke,
+- **Authentication**: Json Web Token,
 - **Database**: MongoDB
 - **File Storage**: EdgeStore
-- **Styling**: Tailwind CSS, Daisy UI
+- **Styling**: Tailwind CSS, Daisy UI, Shadcn UI
 - **API Testing**: Postman
 - **Deployment**: Vercel
 - **Language**: JavaScript/TypeScript
