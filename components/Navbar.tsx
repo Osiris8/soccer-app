@@ -122,13 +122,15 @@ export default function Navbar() {
               <li>
                 <a href="/player/add">Add New Player</a>
               </li>
+
+              <li>
+                <a href={`/myplayers/${user?.id}`}>My Players</a>
+              </li>
+
               <li>
                 <Link href="" onClick={handleLogout}>
                   Logout
                 </Link>
-              </li>
-              <li>
-                <a href={`/myplayers/${user?.id}`}>My Players</a>
               </li>
             </ul>
           </div>
