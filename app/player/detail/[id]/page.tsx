@@ -12,7 +12,7 @@ export default function Home() {
   const [user, setUser] = useState<{ id: string; firstname: string } | null>(
     null
   );
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPlayerCreator, setIsPlayerCreator] = useState(false);
 
@@ -31,26 +31,28 @@ export default function Home() {
     goals: 0,
   });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    axios
-      .get(`/api/auth/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching user:", err);
-      });
-
     const playerId = `${pathname}`.split("/").pop();
     console.log(pathname);
     console.log(playerId);
+
+  useEffect(() => {
+   const fetchUser = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const res = await axios.get("/api/auth/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setUser(res.data);
+  } catch (err) {
+    console.error("Error fetching user:", err);
+  }
+};
+    
     if (!playerId) return;
 
     const fetchPlayer = async () => {
@@ -66,6 +68,7 @@ export default function Home() {
         const player = await response.json();
         const data = player[0];
         console.log(data);
+        console.log(player)
         setPlayerData({
           id: data._id,
           name: data.name || "",
@@ -94,9 +97,9 @@ export default function Home() {
         setLoading(false); // End to loading
       }
     };
-
+    fetchUser();
     fetchPlayer();
-  }, [pathname, user?.id]);
+  }, [pathname, user?.id, playerId]);
 
   if (loading) {
     return (
@@ -132,7 +135,7 @@ export default function Home() {
                 </Button>
               ) : (
                 <Button asChild>
-                  <Link href="/player/add">Add New Player</Link>
+                  <Link href="/login">Add New Player</Link>
                 </Button>
               )}
             </div>
