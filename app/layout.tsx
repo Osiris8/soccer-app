@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AuthProvider } from "./AuthProvider";
 import { EdgeStoreProvider } from "../lib/edgestore";
 
 const geistSans = localFont({
@@ -26,14 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <EdgeStoreProvider>{children}</EdgeStoreProvider>
-        </body>
-      </html>
-    </AuthProvider>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+      </body>
+    </html>
   );
 }
